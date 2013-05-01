@@ -7,12 +7,13 @@ import java.util.Scanner;
 
 public class Main {
 	public int numTasks, numMachines;
+	public double average;
 	public ArrayList<Task> taskArray = new ArrayList<Task>();
 	public ArrayList<Machine> machineArray = new ArrayList<Machine>();
 	
 	
 	public void loadFile() throws FileNotFoundException {
-		Scanner scan = new Scanner(new FileReader("input.txt"));
+		Scanner scan = new Scanner(new FileReader("algoWars"));
 		numTasks = scan.nextInt();
 		scan.nextLine();
 		numMachines = scan.nextInt();
@@ -30,6 +31,12 @@ public class Main {
 			m.speed = scan.nextInt();
 			machineArray.add(m);
 		}
+		double sum = 0;
+		for (Task t: taskArray) {
+			sum = sum + t.speed;
+		}
+		average = sum / numTasks;
+		
 	}
 	
 	public void allocation() {
@@ -48,7 +55,7 @@ public class Main {
 		
 		Random rand = new Random();
 		for (Task t: taskArray){
-			if (t.speed > 8000){
+			if (t.speed > average){
 				machineArray.get(index).tasks.add(t);
 			}
 			else {
